@@ -25,7 +25,8 @@ INSERT INTO `permissions` (`perm_key`, `description`) VALUES
   ('paystubs.upload',   'Upload and publish pay stubs'),
   ('paystubs.view_all', 'View all pay stubs'),
   ('paystubs.view_own', 'View own pay stubs'),
-  ('pto.manage',        'Adjust PTO balances and per-employee accrual rates')
+  ('pto.manage',        'Adjust PTO balances and per-employee accrual rates'),
+  ('testing.manage',    'Issue and revoke test-user access links (one test user per role)')
 ON DUPLICATE KEY UPDATE `description` = VALUES(`description`);
 
 INSERT INTO `roles` (`role_key`, `name`, `description`, `is_system`) VALUES

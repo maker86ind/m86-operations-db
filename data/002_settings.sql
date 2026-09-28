@@ -64,6 +64,13 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('pto.skip_holidays','pto','true','true','boolean','Skip holidays in time off requests','Holidays on the employee''s calendar inside a requested range are not counted.',65),
 ('pto.skip_weekends','pto','true','true','boolean','Skip weekends in time off requests','Saturdays and Sundays inside a requested range are not counted.',60),
 
+-- Test access (super admin issues time-limited links that sign in as a role's test user)
+('testing.durations_hours','testing','[2,4,8,24,72,168]','[2,4,8,24,72,168]','json','Link durations offered (hours)','Choices when issuing a test link. Each must be between 2 and 168 (7 days).',10),
+('testing.default_duration_hours','testing','2','2','number','Default link duration (hours)','Must be one of the durations above.',20),
+('testing.max_uses_options','testing','[1,2,3,5,10,25]','[1,2,3,5,10,25]','json','Link use counts offered','How many times one link may be opened (each opening starts a session, e.g. phone and laptop).',30),
+('testing.default_max_uses','testing','1','1','number','Default link uses','Must be one of the use counts above.',40),
+('testing.redeem_max_failures','testing','20','20','number','Failed link attempts allowed per 15 min','Per IP address. After this many invalid, expired or used-up test links, that address is blocked from opening test links for 15 minutes.',50),
+
 -- Backups
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),
 ('backups.retention_days','backups','30','30','number','Backup retention (days)','',20)
