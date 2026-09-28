@@ -28,7 +28,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('email.cc','payroll_email','[]','[]','email_list','CC recipients','',60),
 ('email.subject_template','payroll_email','"{{payday}} Payroll - {{company}}"','"{{payday}} Payroll - {{company}}"','string','Subject template','Variables: {{payday}} (YYYY/MM/DD), {{company}}, {{period_start}}, {{period_end}}.',70),
 ('email.body_template','payroll_email','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','text','Body template','Variables: {{period_start}}, {{period_end}} (MM/DD/YYYY), {{lines}}, {{signature}}, {{company}}.',80),
-('email.line_template','payroll_email','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','string','Employee line template','Variables: {{name}}, {{hours}}, {{rate}}. Lines are separated by a blank line.',90),
+('email.line_template','payroll_email','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','string','Employee line template','Variables: {{name}}, {{hours}}, {{rate}}, {{pto}}. {{pto}} is the PTO text below (blank when no PTO); if the template has no {{pto}} it is added at the end. Lines are separated by a blank line.',90),
+('email.pto_template','payroll_email','", PTO: {{pto_hours}}"','", PTO: {{pto_hours}}"','string','PTO text on employee line','Shown only when the employee took PTO in the period. Variables: {{pto_hours}}.',95),
 ('email.signature','payroll_email','"--\\nMaker86 Industries"','"--\\nMaker86 Industries"','text','Signature','',100),
 
 -- SMTP (password comes from the SMTP_PASSWORD environment variable)
@@ -50,6 +51,14 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 -- Buckets
 ('buckets.default_low_threshold_hours','buckets','10','10','number','Default low-balance threshold (hours)','Categories without their own threshold use this.',10),
 ('buckets.client_sees_resources','buckets','true','true','boolean','Clients see per-person hours','Show resource names and hours in the client view.',20),
+
+-- PTO / time off
+('pto.accrual_hours','pto','1','1','number','PTO earned (hours)','PTO hours earned for every block of hours worked below. Proportional: half the hours earns half. Employees can have their own rate.',10),
+('pto.per_worked_hours','pto','40','40','number','Per hours worked','Hours worked that earn the PTO above. Accrual posts when the period payroll email is sent.',20),
+('pto.max_balance_hours','pto','0','0','number','Maximum PTO balance (hours)','Accrual stops at this balance. 0 = no cap.',30),
+('pto.allow_negative','pto','false','false','boolean','Allow negative PTO balance','Off = a PTO request cannot be approved for more hours than the employee has.',40),
+('pto.default_day_hours','pto','8','8','number','Default hours per day off','Pre-filled on time off requests.',50),
+('pto.skip_weekends','pto','true','true','boolean','Skip weekends in time off requests','Saturdays and Sundays inside a requested range are not counted.',60),
 
 -- Backups
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),

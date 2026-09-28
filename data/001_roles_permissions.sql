@@ -24,7 +24,8 @@ INSERT INTO `permissions` (`perm_key`, `description`) VALUES
   ('buckets.view_own_customer', 'View buckets of linked customers (client portal)'),
   ('paystubs.upload',   'Upload and publish pay stubs'),
   ('paystubs.view_all', 'View all pay stubs'),
-  ('paystubs.view_own', 'View own pay stubs')
+  ('paystubs.view_own', 'View own pay stubs'),
+  ('pto.manage',        'Adjust PTO balances and per-employee accrual rates')
 ON DUPLICATE KEY UPDATE `description` = VALUES(`description`);
 
 INSERT INTO `roles` (`role_key`, `name`, `description`, `is_system`) VALUES
@@ -44,7 +45,7 @@ INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)
 SELECT r.m86_id, p.m86_id FROM roles r JOIN permissions p ON p.perm_key IN (
   'settings.manage','users.manage','audit.view','employees.manage','wages.view','wages.manage',
   'time.own','time.view_all','time.approve','time.edit_any','periods.manage','payroll.view','payroll.send',
-  'buckets.manage','buckets.view_all','paystubs.upload','paystubs.view_all','paystubs.view_own')
+  'buckets.manage','buckets.view_all','paystubs.upload','paystubs.view_all','paystubs.view_own','pto.manage')
 WHERE r.role_key = 'admin';
 
 INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)
