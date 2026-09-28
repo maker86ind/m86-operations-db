@@ -6,11 +6,13 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 -- Organization
 ('org.company_name','organization','"Maker86 Industries LLC"','"Maker86 Industries LLC"','string','Company name','Used in email subjects and page titles.',10),
 ('org.timezone','organization','"America/Chicago"','"America/Chicago"','string','Timezone','IANA timezone for dates, schedules and send times.',20),
+('org.country','organization','"US"','"US"','string','Country','Two-letter country code (US, CA, GB...). Its holidays decide payday business days, and it is the default holiday calendar for employees without their own country.',25),
 ('org.app_url','organization','"https://operations.maker86.com"','"https://operations.maker86.com"','string','App URL','Public URL used in links and OAuth redirects.',30),
 
 -- Payroll schedule
 ('payroll.period_start_days','payroll_schedule','[8,22]','[8,22]','json','Pay period start days','Days of the month a pay period starts. [8,22] = 8th-21st and 22nd-7th.',10),
 ('payroll.paydays','payroll_schedule','[7,21]','[7,21]','json','Paydays','Days of the month payroll is paid. A period is paid on the first payday after it ends.',20),
+('payroll.payday_adjust','payroll_schedule','"previous"','"previous"','string','Payday on a weekend or holiday','previous = paid the business day before; next = the business day after; none = no change. Holidays come from the company country (Payroll → Holidays).',25),
 ('payroll.submit_deadline_days','payroll_schedule','2','2','number','Submit deadline (days after period end)','Employees should submit their hours within this many days after the period ends.',30),
 ('payroll.send_days_before_payday','payroll_schedule','7','7','number','Send email (days before payday)','Target day for the accountant email. Held until every entry is approved.',40),
 ('payroll.latest_send_days_before_payday','payroll_schedule','5','5','number','Latest send (days before payday)','Used to warn that the email is late.',50),
@@ -26,8 +28,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('email.to_accountant_role','payroll_email','true','true','boolean','Send to Accountant-role users','Adds every active Accountant user to To.',40),
 ('email.extra_to','payroll_email','[]','[]','email_list','Extra To recipients','',50),
 ('email.cc','payroll_email','[]','[]','email_list','CC recipients','',60),
-('email.subject_template','payroll_email','"{{payday}} Payroll - {{company}}"','"{{payday}} Payroll - {{company}}"','string','Subject template','Variables: {{payday}} (YYYY/MM/DD), {{company}}, {{period_start}}, {{period_end}}.',70),
-('email.body_template','payroll_email','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','text','Body template','Variables: {{period_start}}, {{period_end}} (MM/DD/YYYY), {{lines}}, {{signature}}, {{company}}.',80),
+('email.subject_template','payroll_email','"{{payday}} Payroll - {{company}}"','"{{payday}} Payroll - {{company}}"','string','Subject template','Variables: {{payday}} (YYYY/MM/DD), {{payday_us}} (MM/DD/YYYY), {{company}}, {{period_start}}, {{period_end}}.',70),
+('email.body_template','payroll_email','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','text','Body template','Variables: {{payday}} (YYYY/MM/DD), {{payday_us}} (MM/DD/YYYY), {{period_start}}, {{period_end}} (MM/DD/YYYY), {{lines}}, {{signature}}, {{company}}.',80),
 ('email.line_template','payroll_email','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','string','Employee line template','Variables: {{name}}, {{hours}}, {{rate}}, {{pto}}. {{pto}} is the PTO text below (blank when no PTO); if the template has no {{pto}} it is added at the end. Lines are separated by a blank line.',90),
 ('email.pto_template','payroll_email','", PTO: {{pto_hours}}"','", PTO: {{pto_hours}}"','string','PTO text on employee line','Shown only when the employee took PTO in the period. Variables: {{pto_hours}}.',95),
 ('email.signature','payroll_email','"--\\nMaker86 Industries"','"--\\nMaker86 Industries"','text','Signature','',100),
@@ -59,6 +61,7 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('pto.allow_negative','pto','false','false','boolean','Allow negative PTO balance','Off = a PTO request cannot be approved for more hours than the employee has.',40),
 ('pto.max_negative_hours','pto','40','40','number','Maximum negative PTO balance (hours)','Only used when a negative balance is allowed: the balance may not go below minus this many hours. 0 = no limit.',45),
 ('pto.default_day_hours','pto','8','8','number','Default hours per day off','Pre-filled on time off requests.',50),
+('pto.skip_holidays','pto','true','true','boolean','Skip holidays in time off requests','Holidays on the employee''s calendar inside a requested range are not counted.',65),
 ('pto.skip_weekends','pto','true','true','boolean','Skip weekends in time off requests','Saturdays and Sundays inside a requested range are not counted.',60),
 
 -- Backups
