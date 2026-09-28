@@ -57,6 +57,7 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('pto.per_worked_hours','pto','40','40','number','Per hours worked','Hours worked that earn the PTO above. Accrual posts when the period payroll email is sent.',20),
 ('pto.max_balance_hours','pto','0','0','number','Maximum PTO balance (hours)','Accrual stops at this balance. 0 = no cap.',30),
 ('pto.allow_negative','pto','false','false','boolean','Allow negative PTO balance','Off = a PTO request cannot be approved for more hours than the employee has.',40),
+('pto.max_negative_hours','pto','40','40','number','Maximum negative PTO balance (hours)','Only used when a negative balance is allowed: the balance may not go below minus this many hours. 0 = no limit.',45),
 ('pto.default_day_hours','pto','8','8','number','Default hours per day off','Pre-filled on time off requests.',50),
 ('pto.skip_weekends','pto','true','true','boolean','Skip weekends in time off requests','Saturdays and Sundays inside a requested range are not counted.',60),
 
