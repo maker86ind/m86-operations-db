@@ -34,13 +34,16 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('email.pto_template','payroll_email','", PTO: {{pto_hours}}"','", PTO: {{pto_hours}}"','string','PTO text on employee line','Shown only when the employee took PTO in the period. Variables: {{pto_hours}}.',95),
 ('email.signature','payroll_email','"--\\nMaker86 Industries"','"--\\nMaker86 Industries"','text','Signature','',100),
 
--- SMTP (password comes from the SMTP_PASSWORD environment variable)
+-- SMTP
 ('smtp.host','smtp','"smtp.resend.com"','"smtp.resend.com"','string','SMTP host','Resend by default (same provider as Stockerly). Any SMTP relay works.',10),
 ('smtp.port','smtp','465','465','number','SMTP port','465 = implicit TLS, 587 = STARTTLS.',20),
-('smtp.user','smtp','"resend"','"resend"','string','SMTP username','"resend" for Resend. Password (the Resend API key) is set in the server environment (SMTP_PASSWORD), never here.',30),
+('smtp.user','smtp','"resend"','"resend"','string','SMTP username','"resend" for Resend.',30),
+('smtp.password','smtp','""','""','secret','SMTP password / API key','For Resend, paste an API key with sending access. Stored encrypted and never shown again.',40),
 
 -- Auth
 ('auth.google_domains','auth','["maker86.com"]','["maker86.com"]','json','Google Workspace domains','Accounts from these domains may sign in with Google.',10),
+('auth.google_client_id','auth','""','""','string','Google OAuth client ID','From Google Cloud Console > APIs & Services > Credentials. Redirect URI: <App URL>/api/auth/google/callback',12),
+('auth.google_client_secret','auth','""','""','secret','Google OAuth client secret','Stored encrypted and never shown again.',14),
 ('auth.auto_provision','auth','false','false','boolean','Auto-create users on first Google sign-in','Off = an admin must add the user first.',20),
 ('auth.session_idle_minutes','auth','720','720','number','Session idle timeout (minutes)','',30),
 ('auth.session_max_days','auth','30','30','number','Session max age (days)','',40),
