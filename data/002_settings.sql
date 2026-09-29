@@ -42,7 +42,7 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 
 -- Auth
 ('auth.google_domains','auth','["maker86.com"]','["maker86.com"]','json','Google Workspace domains','Accounts from these domains may sign in with Google.',10),
-('auth.google_client_id','auth','""','""','string','Google OAuth client ID','From Google Cloud Console > APIs & Services > Credentials. Redirect URI: <App URL>/api/auth/google/callback',12),
+('auth.google_client_id','auth','""','""','string','Google OAuth client ID','From [Google Cloud Console](https://console.cloud.google.com/apis/credentials) > APIs & Services > Credentials. Redirect URI: <App URL>/api/auth/google/callback',12),
 ('auth.google_client_secret','auth','""','""','secret','Google OAuth client secret','Stored encrypted and never shown again.',14),
 ('auth.auto_provision','auth','false','false','boolean','Auto-create users on first Google sign-in','Off = an admin must add the user first.',20),
 ('auth.session_idle_minutes','auth','720','720','number','Session idle timeout (minutes)','',30),
