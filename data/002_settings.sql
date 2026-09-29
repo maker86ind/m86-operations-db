@@ -70,7 +70,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 
 -- Holiday pay
 ('holiday_pay.enabled','holiday_pay','true','true','boolean','Pay holiday hours','Employees get paid hours for each holiday on their calendar, based on how much they usually work.',10),
-('holiday_pay.hours_per_credit','holiday_pay','4.5','4.5','number','Average weekly hours per holiday hour','One holiday hour for every this many hours of average weekly work. Example at 4.5: 30 h a week earns 6.67 h; 40 h a week earns 8.89 h, capped below.',20),
+('holiday_pay.hours_per_credit','holiday_pay','4.5','4.5','number','Average weekly hours','Holiday hours = average weekly hours ÷ the first number × the second, capped below. Example at 4.5 per 1: 30 h a week earns 6.67 h; 40 h a week earns 8.89 h.',20),
+('holiday_pay.credit_hours','holiday_pay','1','1','number','Holiday hours earned','Holiday hours earned for each block of average weekly hours.',25),
 ('holiday_pay.max_hours','holiday_pay','8','8','number','Most holiday hours per holiday','No one gets more than this for a single holiday.',30),
 ('holiday_pay.lookback_months','holiday_pay','3','3','number','Average over (months)','Weekly average of hours worked over this many months before the holiday. Someone with less history is averaged over the weeks since their first logged day.',40),
 ('holiday_pay.exempt_salaried','holiday_pay','true','true','boolean','Salaried employees are exempt','On = salaried employees get no holiday hours (their fixed hours already cover the holiday).',50),
