@@ -35,9 +35,9 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('email.signature','payroll_email','"--\\nMaker86 Industries"','"--\\nMaker86 Industries"','text','Signature','',100),
 
 -- SMTP (password comes from the SMTP_PASSWORD environment variable)
-('smtp.host','smtp','"smtp.gmail.com"','"smtp.gmail.com"','string','SMTP host','',10),
+('smtp.host','smtp','"smtp.resend.com"','"smtp.resend.com"','string','SMTP host','Resend by default (same provider as Stockerly). Any SMTP relay works.',10),
 ('smtp.port','smtp','465','465','number','SMTP port','465 = implicit TLS, 587 = STARTTLS.',20),
-('smtp.user','smtp','""','""','string','SMTP username','Password is set in the server environment (SMTP_PASSWORD), never here.',30),
+('smtp.user','smtp','"resend"','"resend"','string','SMTP username','"resend" for Resend. Password (the Resend API key) is set in the server environment (SMTP_PASSWORD), never here.',30),
 
 -- Auth
 ('auth.google_domains','auth','["maker86.com"]','["maker86.com"]','json','Google Workspace domains','Accounts from these domains may sign in with Google.',10),
