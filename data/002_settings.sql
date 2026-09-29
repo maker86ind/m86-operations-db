@@ -75,6 +75,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('testing.redeem_max_failures','testing','20','20','number','Failed link attempts allowed per 15 min','Per IP address. After this many invalid, expired or used-up test links, that address is blocked from opening test links for 15 minutes.',50),
 
 -- Backups
+('schedule.default_start','schedule','"08:00"','"08:00"','time','Usual start time','Filled in when someone adds a work day.',10),
+('schedule.default_end','schedule','"17:00"','"17:00"','time','Usual end time','Filled in when someone adds a work day.',20),
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),
 ('backups.retention_days','backups','30','30','number','Backup retention (days)','',20)
 ON DUPLICATE KEY UPDATE
