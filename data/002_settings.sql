@@ -30,8 +30,9 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('email.cc','payroll_email','[]','[]','email_list','CC recipients','',60),
 ('email.subject_template','payroll_email','"{{payday}} Payroll - {{company}}"','"{{payday}} Payroll - {{company}}"','string','Subject template','Variables: {{payday}} (YYYY/MM/DD), {{payday_us}} (MM/DD/YYYY), {{company}}, {{period_start}}, {{period_end}}.',70),
 ('email.body_template','payroll_email','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','"Pay Period: {{period_start}} - {{period_end}}\\n\\n{{lines}}\\n\\n{{signature}}"','text','Body template','Variables: {{payday}} (YYYY/MM/DD), {{payday_us}} (MM/DD/YYYY), {{period_start}}, {{period_end}} (MM/DD/YYYY), {{lines}}, {{signature}}, {{company}}.',80),
-('email.line_template','payroll_email','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','string','Employee line template','Variables: {{name}}, {{hours}}, {{rate}}, {{pto}}. {{pto}} is the PTO text below (blank when no PTO); if the template has no {{pto}} it is added at the end. Lines are separated by a blank line.',90),
+('email.line_template','payroll_email','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','"{{name}} - Hours: {{hours}}, Rate: ${{rate}}"','string','Employee line template','Variables: {{name}}, {{hours}}, {{rate}}, {{pto}}, {{holiday}}. {{pto}} and {{holiday}} are the PTO and holiday texts below (blank when there are none); a template without them gets them added at the end. Lines are separated by a blank line.',90),
 ('email.pto_template','payroll_email','", PTO: {{pto_hours}}"','", PTO: {{pto_hours}}"','string','PTO text on employee line','Shown only when the employee took PTO in the period. Variables: {{pto_hours}}.',95),
+('email.holiday_template','payroll_email','", Holiday: {{holiday_hours}}"','", Holiday: {{holiday_hours}}"','string','Holiday text on employee line','Shown only when the employee has holiday pay in the period. Variables: {{holiday_hours}}.',96),
 ('email.signature','payroll_email','"--\\nMaker86 Industries"','"--\\nMaker86 Industries"','text','Signature','',100),
 
 -- SMTP
@@ -66,6 +67,13 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('pto.default_day_hours','pto','8','8','number','Default hours per day off','Pre-filled on time off requests.',50),
 ('pto.skip_holidays','pto','true','true','boolean','Skip holidays in time off requests','Holidays on the employee''s calendar inside a requested range are not counted.',65),
 ('pto.skip_weekends','pto','true','true','boolean','Skip weekends in time off requests','Saturdays and Sundays inside a requested range are not counted.',60),
+
+-- Holiday pay
+('holiday_pay.enabled','holiday_pay','true','true','boolean','Pay holiday hours','Employees get paid hours for each holiday on their calendar, based on how much they usually work.',10),
+('holiday_pay.hours_per_credit','holiday_pay','4.5','4.5','number','Average weekly hours per holiday hour','One holiday hour for every this many hours of average weekly work. Example at 4.5: 30 h a week earns 6.67 h; 40 h a week earns 8.89 h, capped below.',20),
+('holiday_pay.max_hours','holiday_pay','8','8','number','Most holiday hours per holiday','No one gets more than this for a single holiday.',30),
+('holiday_pay.lookback_months','holiday_pay','3','3','number','Average over (months)','Weekly average of hours worked over this many months before the holiday. Someone with less history is averaged over the weeks since their first logged day.',40),
+('holiday_pay.exempt_salaried','holiday_pay','true','true','boolean','Salaried employees are exempt','On = salaried employees get no holiday hours (their fixed hours already cover the holiday).',50),
 
 -- Test access (super admin issues time-limited links that sign in as a role's test user)
 ('testing.durations_hours','testing','[2,4,8,24,72,168]','[2,4,8,24,72,168]','json','Link durations offered (hours)','Choices when issuing a test link. Each must be between 2 and 168 (7 days).',10),
