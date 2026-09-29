@@ -10,14 +10,14 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('org.app_url','organization','"https://operations.maker86.com"','"https://operations.maker86.com"','string','App URL','Public URL used in links and OAuth redirects.',30),
 
 -- Payroll schedule
-('payroll.period_start_days','payroll_schedule','[8,22]','[8,22]','json','Pay period start days','Days of the month a pay period starts. [8,22] = 8th-21st and 22nd-7th.',10),
+('payroll.period_start_days','payroll_schedule','[8,22]','[8,22]','json','Pay period start days','Days of the month a pay period starts. 8 and 22 = the 8th–21st and the 22nd–7th.',10),
 ('payroll.paydays','payroll_schedule','[7,21]','[7,21]','json','Paydays','Days of the month payroll is paid. A period is paid on the first payday after it ends.',20),
-('payroll.payday_adjust','payroll_schedule','"previous"','"previous"','string','Payday on a weekend or holiday','previous = paid the business day before; next = the business day after; none = no change. Holidays come from the company country (Payroll → Holidays).',25),
+('payroll.payday_adjust','payroll_schedule','"previous"','"previous"','string','Payday on a weekend or holiday','Holidays come from the company country (Payroll → Holidays).',25),
 ('payroll.submit_deadline_days','payroll_schedule','2','2','number','Submit deadline (days after period end)','Employees should submit their hours within this many days after the period ends.',30),
 ('payroll.send_days_before_payday','payroll_schedule','7','7','number','Send email (days before payday)','Target day for the accountant email. Held until every entry is approved.',40),
 ('payroll.latest_send_days_before_payday','payroll_schedule','5','5','number','Latest send (days before payday)','Used to warn that the email is late.',50),
 ('payroll.send_time','payroll_schedule','"07:00"','"07:00"','time','Send time','Local time of day the email goes out once due.',60),
-('payroll.workweek_start','payroll_schedule','0','0','number','Workweek start day','0 = Sunday ... 6 = Saturday. Used for overtime checks.',70),
+('payroll.workweek_start','payroll_schedule','0','0','number','Workweek start day','Used for overtime checks.',70),
 ('payroll.ot_threshold_hours','payroll_schedule','40','40','number','Overtime threshold (hours per workweek)','Lines over this are annotated for the accountant.',80),
 ('payroll.ot_annotation','payroll_schedule','true','true','boolean','Annotate overtime in the email','Adds an OT note to an employee line when a workweek exceeds the threshold.',90),
 
