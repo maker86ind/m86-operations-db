@@ -32,7 +32,10 @@ INSERT INTO `permissions` (`perm_key`, `description`) VALUES
   ('taxdocs.upload',    'Upload and publish W-2s'),
   ('schedule.own',      'Enter own planned work days'),
   ('calendar.view',     'See the company calendar (who is working or off)'),
-  ('locations.manage',  'Add, rename and archive work locations')
+  ('locations.manage',  'Add, rename and archive work locations'),
+  ('tasks.use',         'See, create and work on tasks'),
+  ('tasks.manage_all',  'Edit and delete anyone''s tasks and comments'),
+  ('tasks.categories',  'Manage task categories')
 ON DUPLICATE KEY UPDATE `description` = VALUES(`description`);
 
 INSERT INTO `roles` (`role_key`, `name`, `description`, `is_system`) VALUES
@@ -53,23 +56,25 @@ SELECT r.m86_id, p.m86_id FROM roles r JOIN permissions p ON p.perm_key IN (
   'settings.manage','users.manage','audit.view','employees.manage','wages.view','wages.manage',
   'time.own','time.view_all','time.approve','time.edit_any','periods.manage','payroll.view','payroll.send',
   'buckets.manage','buckets.view_all','paystubs.upload','paystubs.view_all','paystubs.view_own','pto.manage',
-  'taxdocs.view_own','taxdocs.view_all','taxdocs.upload','schedule.own','calendar.view','locations.manage')
+  'taxdocs.view_own','taxdocs.view_all','taxdocs.upload','schedule.own','calendar.view','locations.manage',
+  'tasks.use','tasks.manage_all','tasks.categories')
 WHERE r.role_key = 'admin';
 
 INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)
 SELECT r.m86_id, p.m86_id FROM roles r JOIN permissions p ON p.perm_key IN (
   'time.own','time.view_all','time.approve','time.edit_any','buckets.view_all','paystubs.view_own','taxdocs.view_own',
-  'schedule.own','calendar.view','locations.manage')
+  'schedule.own','calendar.view','locations.manage','tasks.use')
 WHERE r.role_key = 'approver';
 
 INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)
 SELECT r.m86_id, p.m86_id FROM roles r JOIN permissions p ON p.perm_key IN (
-  'wages.view','time.view_all','payroll.view','paystubs.upload','paystubs.view_all','taxdocs.view_all','taxdocs.upload','calendar.view')
+  'wages.view','time.view_all','payroll.view','paystubs.upload','paystubs.view_all','taxdocs.view_all','taxdocs.upload','calendar.view',
+  'tasks.use')
 WHERE r.role_key = 'accountant';
 
 INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)
 SELECT r.m86_id, p.m86_id FROM roles r JOIN permissions p ON p.perm_key IN (
-  'time.own','paystubs.view_own','taxdocs.view_own','schedule.own','calendar.view')
+  'time.own','paystubs.view_own','taxdocs.view_own','schedule.own','calendar.view','tasks.use')
 WHERE r.role_key = 'employee';
 
 INSERT IGNORE INTO `role_permissions` (`role_id`, `permission_id`)

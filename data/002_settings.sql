@@ -77,6 +77,10 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('holiday_pay.exempt_salaried','holiday_pay','true','true','boolean','Salaried employees are exempt','On = salaried employees get no holiday hours (their fixed hours already cover the holiday).',50),
 
 -- Test access (super admin issues time-limited links that sign in as a role's test user)
+-- Tasks
+('tasks.number_prefix','tasks','"T"','"T"','string','Task number prefix','Shown before every task number, e.g. T-42. Letters only, up to 5.',10),
+('tasks.max_file_mb','tasks','25','25','number','Largest file (MB)','Biggest file that can be attached to a task, step or comment. At most 25 MB.',20),
+
 ('testing.durations_hours','testing','[2,4,8,24,72,168]','[2,4,8,24,72,168]','json','Link durations offered (hours)','Choices when issuing a test link. Each must be between 2 and 168 (7 days).',10),
 ('testing.default_duration_hours','testing','2','2','number','Default link duration (hours)','Must be one of the durations above.',20),
 ('testing.max_uses_options','testing','[1,2,3,5,10,25]','[1,2,3,5,10,25]','json','Link use counts offered','How many times one link may be opened (each opening starts a session, e.g. phone and laptop).',30),
