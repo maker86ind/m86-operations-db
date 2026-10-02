@@ -95,7 +95,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('schedule.default_start','schedule','"08:00"','"08:00"','time','Usual start time','Filled in when someone adds a work day.',10),
 ('schedule.default_end','schedule','"17:00"','"17:00"','time','Usual end time','Filled in when someone adds a work day.',20),
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),
-('backups.retention_days','backups','30','30','number','Backup retention (days)','',20)
+('backups.retention_days','backups','30','30','number','Backup retention (days)','',20),
+('backups.predeploy_keep','backups','20','20','number','Pre-deploy backups to keep','How many pre-deploy database backups to keep. The newest one and any less than 7 days old are always kept.',30)
 ON DUPLICATE KEY UPDATE
   `setting_group` = VALUES(`setting_group`),
   `default_json` = VALUES(`default_json`),
