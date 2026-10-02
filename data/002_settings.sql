@@ -49,6 +49,10 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('auth.session_idle_minutes','auth','720','720','number','Session idle timeout (minutes)','',30),
 ('auth.session_max_days','auth','30','30','number','Session max age (days)','',40),
 ('auth.invite_expiry_hours','auth','72','72','number','Invite link expiry (hours)','',50),
+('auth.max_failed_signins','auth','10','10','number','Failed sign-ins allowed per email','Wrong passwords for one email before password sign-in is blocked for it. Successful sign-ins don''t count.',60),
+('auth.max_failed_signins_per_ip','auth','10','10','number','Failed sign-ins allowed per network address','Everyone in the office shares one address. Raise this if people there get blocked.',62),
+('auth.failed_signin_window_minutes','auth','15','15','number','Sign-in block length (minutes)','Failures are counted over this window, and a block lasts until it ends.',64),
+('auth.max_failed_mfa_codes','auth','10','10','number','Wrong authenticator codes allowed','Wrong codes per person within the same window before code entry is blocked.',66),
 
 -- MFA
 ('mfa.required_roles','mfa','["super_admin","admin","accountant","approver"]','["super_admin","admin","accountant","approver"]','json','Roles that must use MFA','Users holding any of these roles must enrol MFA.',10),
