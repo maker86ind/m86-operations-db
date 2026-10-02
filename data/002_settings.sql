@@ -98,8 +98,8 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),
 ('backups.retention_days','backups','30','30','number','Backup retention (days)','',20),
 ('backups.predeploy_keep','backups','20','20','number','Pre-deploy backups to keep','How many pre-deploy database backups to keep. The newest one and any less than 7 days old are always kept.',30),
-('uploads.w4_max_mb','uploads','15','15','number','Largest W-4 (MB)','Biggest W-4 photo or PDF an employee or payroll can upload. At most 99 MB.',10),
-('uploads.document_max_mb','uploads','25','25','number','Largest pay stub or W-2 PDF (MB)','Biggest pay stub or W-2 PDF payroll can upload at once. At most 99 MB.',20)
+('uploads.w4_max_mb','uploads','15','15','number','Largest W-4 (MB)','Biggest W-4 photo or PDF an employee or payroll can upload. At most 90 MB.',10),
+('uploads.document_max_mb','uploads','25','25','number','Largest pay stub or W-2 PDF (MB)','Biggest pay stub or W-2 PDF payroll can upload at once. At most 90 MB.',20)
 ON DUPLICATE KEY UPDATE
   `setting_group` = VALUES(`setting_group`),
   `default_json` = VALUES(`default_json`),
