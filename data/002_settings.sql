@@ -89,14 +89,17 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('testing.default_duration_hours','testing','2','2','number','Default link duration (hours)','Must be one of the durations above.',20),
 ('testing.max_uses_options','testing','[1,2,3,5,10,25]','[1,2,3,5,10,25]','json','Link use counts offered','How many times one link may be opened (each opening starts a session, e.g. phone and laptop).',30),
 ('testing.default_max_uses','testing','1','1','number','Default link uses','Must be one of the use counts above.',40),
-('testing.redeem_max_failures','testing','20','20','number','Failed link attempts allowed per 15 min','Per IP address. After this many invalid, expired or used-up test links, that address is blocked from opening test links for 15 minutes.',50),
+('testing.redeem_max_failures','testing','20','20','number','Failed link attempts allowed','Per network address. After this many invalid, expired or used-up test links within the block length below, that address can''t open test links until the block length has passed.',50),
+('testing.redeem_window_minutes','testing','15','15','number','Test link block length (minutes)','Failed attempts are counted over this window, and a block lasts until it ends.',55),
 
 -- Backups
 ('schedule.default_start','schedule','"08:00"','"08:00"','time','Usual start time','Filled in when someone adds a work day.',10),
 ('schedule.default_end','schedule','"17:00"','"17:00"','time','Usual end time','Filled in when someone adds a work day.',20),
 ('backups.time','backups','"02:00"','"02:00"','time','Nightly backup time','',10),
 ('backups.retention_days','backups','30','30','number','Backup retention (days)','',20),
-('backups.predeploy_keep','backups','20','20','number','Pre-deploy backups to keep','How many pre-deploy database backups to keep. The newest one and any less than 7 days old are always kept.',30)
+('backups.predeploy_keep','backups','20','20','number','Pre-deploy backups to keep','How many pre-deploy database backups to keep. The newest one and any less than 7 days old are always kept.',30),
+('uploads.w4_max_mb','uploads','15','15','number','Largest W-4 (MB)','Biggest W-4 photo or PDF an employee or payroll can upload. At most 99 MB.',10),
+('uploads.document_max_mb','uploads','25','25','number','Largest pay stub or W-2 PDF (MB)','Biggest pay stub or W-2 PDF payroll can upload at once. At most 99 MB.',20)
 ON DUPLICATE KEY UPDATE
   `setting_group` = VALUES(`setting_group`),
   `default_json` = VALUES(`default_json`),
