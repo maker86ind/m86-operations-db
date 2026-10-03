@@ -52,11 +52,11 @@ INSERT INTO `settings` (`setting_key`,`setting_group`,`value_json`,`default_json
 ('auth.max_failed_signins','auth','10','10','number','Failed sign-ins allowed per email','Wrong passwords for one email before password sign-in is blocked for it. Successful sign-ins don''t count.',60),
 ('auth.max_failed_signins_per_ip','auth','10','10','number','Failed sign-ins allowed per network address','Everyone in the office shares one address. Raise this if people there get blocked.',62),
 ('auth.failed_signin_window_minutes','auth','15','15','number','Sign-in block length (minutes)','Failures are counted over this window, and a block lasts until it ends.',64),
-('auth.max_failed_mfa_codes','auth','10','10','number','Wrong authenticator codes allowed','Wrong codes per person within the same window before code entry is blocked.',66),
 
 -- MFA
 ('mfa.required_roles','mfa','["super_admin","admin","accountant","approver"]','["super_admin","admin","accountant","approver"]','json','Roles that must use MFA','Users holding any of these roles must enrol MFA.',10),
 ('mfa.remember_days','mfa','30','30','number','Remember device (days)','0 = ask every login. Super Admins are always asked.',20),
+('auth.max_failed_mfa_codes','mfa','10','10','number','Wrong authenticator codes allowed','Wrong codes per person within the sign-in block length before code entry is blocked.',30),
 
 -- Buckets
 ('buckets.default_low_threshold_hours','buckets','10','10','number','Default low-balance threshold (hours)','Categories without their own threshold use this.',10),
